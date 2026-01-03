@@ -106,15 +106,6 @@ To reduce cross-lingual disparities, we fine-tuned several LLMs on GlobMed.
 These results demonstrate that **carefully curated multilingual data can outperform sheer model scale**.
 
 
-## 6. Data Construction Pipeline
-
-GlobMed was built through a rigorous four-stage pipeline:
-
-1. **Data collection & screening** (manual quality control)  
-2. **Agentic machine translation** with medical NER + reflection  
-3. **Expert refinement** by dual LLM agents  
-4. **Bilingual medical expert evaluation** (accuracy, fluency, completeness)
-
 
 ## 7. Usage
 
