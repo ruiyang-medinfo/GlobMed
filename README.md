@@ -19,7 +19,7 @@
 - **[2025.03]** 🔥 GlobMed-Bench released, evaluating 56 LLMs  
 
 
-## 1. Motivation
+## 1. Introduction
 
 Recent large language models (LLMs) have demonstrated strong medical reasoning abilities. 
 However, progress in this area is constrained by the lack of **large-scale, high-quality multilingual medical datasets**.
