@@ -11,7 +11,6 @@
   <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HuggingFace]</b></a>
 </p>
 
-
 ## 📢 News
 - **[2025.01]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
 
@@ -26,14 +25,9 @@ We introduce GlobMed, the largest multilingual medical dataset to date, spanning
   - Low-resource: Bengali, Malay, Swahili, Urdu, Wolof, Yoruba, Zulu
 
 ### Core Tasks
-- **Natural Language Inference (NLI)**
-- **Long-Form Question Answering (QA)**
-- **Multiple-choice Question Answering (MCQA)**
-
-### Data Sources
-- **NLI:** BioNLI, MedNLI  
-- **Long-Form QA:** ExpertQA-Bio, ExpertQA-Med, LiveQA  
-- **MCQA:** HeadQA, MedExpQA, MedQA, MMLU-Pro  
+- **Natural Language Inference:** BioNLI, MedNLI
+- **Long-Form Question Answering:** ExpertQA-Bio, ExpertQA-Med, LiveQA 
+- **Multiple-choice Question Answering:** HeadQA, MedExpQA, MedQA, MMLU-Pro  
 
 ## GlobMed-Bench
 
@@ -52,23 +46,14 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 - Significant performance disparities across languages, especially on low-resource languages
 - Reasoning-enhanced LLMs consistently outperform non-reasoning counterparts  
 
-
-## 5. GlobMed-LLMs
-
-To reduce cross-lingual disparities, we fine-tuned several LLMs on GlobMed.
-
-### Models
-- MedGemma-4B
-- Qwen3 series (1.7B / 4B / 8B)
-
-## 7. Usage
+## Usage
 
 ### Load Dataset
 
-## 8. Contact
-For any inquiries or concerns, feel free to reach out to us via Email: [Rui Yang](yang.rui@duke-nus.edu.sg) and [xxxxx](xxxxxxxxx).
+## Contact
+[Rui Yang](yang_rui@u.nus.edu).
 
-## 9. Citation
+## Citation
 ```
 
 ```
