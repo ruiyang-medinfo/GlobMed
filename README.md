@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://arxiv.org/abs/XXXX.XXXXX"><b>[📜 Paper]</b></a> •
-  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HuggingFace]</b></a> •
+  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HuggingFace]</b></a>
 </p>
 
 
