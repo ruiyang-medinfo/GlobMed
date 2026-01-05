@@ -13,79 +13,43 @@
 
 
 ## 📢 News
-- **[2025.01]** 🔥 GlobMed repository released  
-- **[2025.02]** 🔥 500K+ multilingual medical entries across 12 languages  
-- **[2025.03]** 🔥 GlobMed-Bench released, evaluating 56 LLMs  
+- **[2025.01]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
 
+## GlobMed
 
-## 1. Introduction
+We introduce GlobMed, the largest multilingual medical dataset to date, spanning 20 languages.
 
-Recent large language models (LLMs) have demonstrated strong medical reasoning abilities. 
-However, progress in this area is constrained by the lack of **large-scale, high-quality multilingual medical datasets**.
+### Scale & Coverage
+- **800,000+ entries**
+- **20 languages**
+  - High-resource: Arabic, Chinese, English, French, German, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Spanish, Thai
+  - Low-resource: Bengali, Malay, Swahili, Urdu, Wolof, Yoruba, Zulu
 
-Most existing medical datasets:
-- focus on a single language, predominantly English,
-- cover only a limited subset of medical tasks,
-- or lack the scale and consistency required for systematic multilingual evaluation.
-
-Without a unified multilingual medical dataset, it is difficult to:
-- reliably evaluate LLM performance across languages,
-- quantify cross-lingual performance disparities,
-- or benchmark models in realistic global medical settings.
-
-**GlobMed is introduced as a large-scale multilingual medical dataset**, covering 12 languages and three core medical tasks (NLI, long-form QA, and MCQA).  
-Crucially, GlobMed is **designed with benchmarking in mind**, enabling consistent and systematic evaluation across languages, tasks, and model families.
-
-Building on GlobMed, we further establish **GlobMed-Bench**, which leverages this dataset to provide the most comprehensive multilingual medical benchmark to date.
-
-
-
-## 2. What is GlobMed?
-
-GlobMed is a **comprehensive benchmark suite** consisting of:
-
-- **GlobMed**: a large-scale multilingual medical dataset  
-- **GlobMed-Bench**: a systematic evaluation benchmark  
-- **GlobMed-LLMs**: multilingual medical LLMs fine-tuned on GlobMed  
-
-Together, these resources support **global, equitable development of medical AI**.
-
-
-## 3. GlobMed Dataset
-
-### 📦 Scale & Coverage
-- **500,000+ entries**
-- **12 languages**, representing ~75% of the global population
-  - High-resource: Chinese, English, French, German, Japanese, Korean, Portuguese, Spanish
-  - Low-resource: Swahili, Wolof, Yoruba, Zulu
-
-### 🧠 Core Tasks
+### Core Tasks
 - **Natural Language Inference (NLI)**
-- **Long-form Question Answering (QA)**
+- **Long-Form Question Answering (QA)**
 - **Multiple-choice Question Answering (MCQA)**
 
-### 📚 Data Sources
-- BioNLI, MedNLI  
-- ExpertQA-Bio, ExpertQA-Med, LiveQA  
-- HeadQA, MedExpQA, MedQA, MMLU-Pro  
+### Data Sources
+- **NLI:** BioNLI, MedNLI  
+- **Long-Form QA:** ExpertQA-Bio, ExpertQA-Med, LiveQA  
+- **MCQA:** HeadQA, MedExpQA, MedQA, MMLU-Pro  
 
-All data underwent **manual screening**, **agentic machine translation**, and **bilingual medical expert evaluation** to ensure linguistic accuracy and clinical validity.
+## GlobMed-Bench
 
-## 4. GlobMed-Bench
+Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 56 state-of-the-art LLMs across multiple multilingual medical tasks.
 
-GlobMed-Bench is the **largest multilingual medical evaluation benchmark to date**.
-
-### 🔍 Evaluation Scope
+### Evaluation Scope
 - **56 state-of-the-art LLMs**
-  - 12 proprietary models
-  - 44 open-weight models
+  - 12 proprietary LLMs
+  - 44 open-weight LLMs
 - **40,000+ independent experiments**
 - **125M+ generated responses**
 
-### 📊 Key Findings
+### Key Findings
 - Proprietary LLMs achieve higher average performance but within a narrow range  
 - Open-weight LLMs show large variance and strong scaling effects  
-- **Severe performance gaps persist in low-resource languages**  
+- Significant performance disparities across languages, especially on low-resource languages
 - Reasoning-enhanced LLMs consistently outperform non-reasoning counterparts  
 
 
@@ -93,24 +57,13 @@ GlobMed-Bench is the **largest multilingual medical evaluation benchmark to date
 
 To reduce cross-lingual disparities, we fine-tuned several LLMs on GlobMed.
 
-### 🤖 Models
+### Models
 - MedGemma-4B
 - Qwen3 series (1.7B / 4B / 8B)
-
-### 🚀 Results
-- **>40% average performance improvement** over baseline models  
-- **>3× improvement in low-resource languages**  
-- Small models (≤8B) outperform much larger LLMs in multilingual medical tasks  
-
-These results demonstrate that **carefully curated multilingual data can outperform sheer model scale**.
-
-
 
 ## 7. Usage
 
 ### Load Dataset
-
-
 
 ## 8. Contact
 For any inquiries or concerns, feel free to reach out to us via Email: [Rui Yang](yang.rui@duke-nus.edu.sg) and [xxxxx](xxxxxxxxx).
