@@ -46,7 +46,7 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 ### Load Dataset
 
 ## Contact
-Rui Yang: yang_rui@u.nus.edu.
+Rui Yang: yang.rui@duke-nus.edu.sg
 Weihao Xuan:
 Dr. Nan Liu: 
 
