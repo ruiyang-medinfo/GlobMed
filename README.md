@@ -6,11 +6,6 @@
  <img src="https://img.shields.io/badge/LLMs_Evaluated-56-blue" />
 </p>
 
-<p align="center">
-  <a href=""><b>[📜 Paper]</b></a> •
-  <a href="https://huggingface.co/collections/ruiyang-medinfo/globmed"><b>[🤗 HuggingFace]</b></a>
-</p>
-
 ## 📢 News
 - **[2025.01]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
 
