@@ -47,11 +47,13 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 
 ## Contact
 Rui Yang: yang_rui@u.nus.edu.
+Weihao Xuan:
+Dr. Nan Liu: 
 
 ## Citation
 ```
 
 ```
 
-## 10. License
+## License
 This repository is licensed under the [MIT](https://github.com/microsoft/PEACE/blob/main/LICENSE) License.
