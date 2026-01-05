@@ -56,4 +56,4 @@ Dr. Nan Liu:
 ```
 
 ## License
-This repository is licensed under the [MIT](https://github.com/microsoft/PEACE/blob/main/LICENSE) License.
+This repository is licensed under the [MIT](https://github.com/microsoft/PEACE/blob/main/LICENSE) license.
