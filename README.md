@@ -14,7 +14,7 @@
 We introduce GlobMed, the largest multilingual medical dataset to date, spanning 20 languages.
 
 <p align="center">
-  <img src="fig/map.svg" width="800"/>
+  <img src="fig/map.svg"/>
 </p>
 
 
@@ -36,7 +36,13 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 ### Evaluation Scope
 - **56 state-of-the-art LLMs**
   - 12 proprietary LLMs
+<p align="center">
+  <img src="fig/bench1.svg"/>
+</p>
   - 44 open-weight LLMs
+<p align="center">
+  <img src="fig/bench2.svg"/>
+</p>
 - **40,000+ independent experiments**
 - **125M+ generated responses**
 
