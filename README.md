@@ -55,7 +55,18 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 ## Usage
 
 ### Load Dataset
+GlobMed datasets are hosted on the Hugging Face platform and can be loaded using the `datasets` library.
 
+```python
+from datasets import load_dataset
+
+# Load GlobMed-MMLU-Pro dataset (English)
+globmed_mmlu_pro = load_dataset("ruiyang-medinfo/GlobMed_MMLU-Pro", "en")
+
+# Access train and test splits
+globmed_mmlu_pro_train = globmed_mmlu_pro["train"]
+globmed_mmlu_pro_test = globmed_mmlu_pro["test"]
+```
 ## Contact
 Rui Yang: yang.rui@duke-nus.edu.sg
 Weihao Xuan:
