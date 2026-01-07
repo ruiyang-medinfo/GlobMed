@@ -57,6 +57,7 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 <p align="center">
   <img src="fig/globmed-llm.svg"/>
 </p>
+
 ## Usage
 
 ### Load Dataset
