@@ -63,9 +63,9 @@ globmed_mmlu_pro_train = globmed_mmlu_pro["train"]
 globmed_mmlu_pro_test = globmed_mmlu_pro["test"]
 ```
 ## Contact
-Rui Yang: yang.rui@duke-nus.edu.sg
-Weihao Xuan:
-Dr. Nan Liu: 
+- **Rui Yang**: yang.rui@duke-nus.edu.sg
+- **Weihao Xuan**: xuan@ms.k.u-tokyo.ac.jp
+- **Dr. Nan Liu**: liu.nan@duke-nus.edu.sg
 
 ## Citation
 ```
