@@ -54,6 +54,9 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 - Medical-specific LLMs do not consistently outperform their general counterparts
 
 ## GlobMed-LLMs
+<p align="center">
+  <img src="fig/globmed-llm.svg"/>
+</p>
 ## Usage
 
 ### Load Dataset
