@@ -11,14 +11,16 @@
 
 ## GlobMed
 We introduce GlobMed, the largest multilingual medical dataset to date, spanning 20 languages.
-<p align="center">
-  <img src="fig/map.svg"/>
-</p>
+
 ### Scale & Coverage
 - **800,000+ entries**
 - **20 languages**
   - High-resource: Arabic, Chinese, English, French, German, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Spanish, Thai
   - Low-resource: Bengali, Malay, Swahili, Urdu, Wolof, Yoruba, Zulu
+ 
+<p align="center">
+  <img src="fig/map.svg"/>
+</p>
 
 ### Core Tasks
 - **Natural Language Inference:** BioNLI, MedNLI
