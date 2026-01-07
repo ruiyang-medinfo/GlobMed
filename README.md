@@ -45,8 +45,7 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
       <img src="fig/bench2.svg"/>
     </p>
     
-- Language Disparities
-- 
+
 ### Key Findings
 - Proprietary LLMs achieve higher average performance but within a narrow range  
 - Open-weight LLMs show large variance and strong scaling effects  
