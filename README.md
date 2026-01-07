@@ -11,7 +11,9 @@
 
 ## GlobMed
 We introduce GlobMed, the largest multilingual medical dataset to date, spanning 20 languages.
-
+<p align="center">
+  <img src="fig/map.svg"/>
+</p>
 ### Scale & Coverage
 - **800,000+ entries**
 - **20 languages**
