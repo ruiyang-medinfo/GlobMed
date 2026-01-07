@@ -51,7 +51,7 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 - Open-weight LLMs show large variance and strong scaling effects  
 - Significant performance disparities across languages, especially on low-resource languages
 - Reasoning-enhanced LLMs consistently outperform non-reasoning counterparts  
-- 
+- Medical-specific LLMs do not consistently outperform their general counterparts
 
 ## GlobMed-LLMs
 ## Usage
