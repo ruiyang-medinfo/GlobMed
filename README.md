@@ -73,10 +73,9 @@ We introduced GlobMed-LLMs, a suite of multilingual medical LLMs trained on Glob
 ```python
 from datasets import load_dataset
 
-# Load GlobMed-MMLU-Pro (English)
+# load GlobMed-MMLU-Pro (English)
 globmed_mmlu_pro = load_dataset("ruiyang-medinfo/GlobMed_MMLU-Pro", "en")
 
-# Access train and test splits
 globmed_mmlu_pro_train = globmed_mmlu_pro["train"]
 globmed_mmlu_pro_test = globmed_mmlu_pro["test"]
 ```
