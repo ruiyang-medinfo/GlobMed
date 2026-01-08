@@ -6,6 +6,13 @@
  <img src="https://img.shields.io/badge/LLMs_Evaluated-56-blue" />
 </p>
 
+<p align="center">
+  <a href="https://doi.org/10.48550/arXiv.2601.02186"><b>[📜 Paper]</b></a> •
+  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HF Datasets]</b></a> •
+  <a href="https://huggingface.co/GlobMed"><b>[🤗 HF Models]</b></a> •
+  <a href="https://github.com/GlobMed/GlobMed"><b>[🐱 GitHub]</b></a>
+</p>
+
 ## 📢 News
 - **[2025.01]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
 
