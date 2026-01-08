@@ -7,9 +7,11 @@
 </p>
 
 <p align="center">
-  <a href="https://doi.org/10.48550/arXiv.2601.02186"><b>[📜 Paper]</b></a> •
-  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 Hugging Face]</b></a> 
+  <a href="https://arxiv.org/abs/2601.02186"><b>[📜 Paper]</b></a> •
+  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HuggingFace]</b></a> •
+  <a href="https://github.com/GlobMed/GlobMed"><b>[🐱 GitHub]</b></a>
 </p>
+
 
 ## 📢 News
 - **[2025.01]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
