@@ -2,31 +2,32 @@
 
 <p align="center">
  <img src="https://img.shields.io/badge/Languages-20-green" />
- <img src="https://img.shields.io/badge/Entries-500K%2B-brightgreen" />
+ <img src="https://img.shields.io/badge/Entries-800K%2B-brightgreen" />
  <img src="https://img.shields.io/badge/LLMs_Evaluated-56-blue" />
 </p>
 
 <p align="center">
-  <a href=""><b>[📜 Paper]</b></a> •
-  <a href="https://huggingface.co/collections/ruiyang-medinfo/globmed"><b>[🤗 HuggingFace]</b></a>
+  <a href="https://arxiv.org/abs/2601.02186"><b>[📜 Paper]</b></a> •
+  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HuggingFace]</b></a> •
+  <a href="https://github.com/ruiyang-medinfo/GlobMed"><b>[🐱 GitHub]</b></a>
 </p>
+
 
 ## 📢 News
 - **[2025.01]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
 
 ## GlobMed
-
 We introduce GlobMed, the largest multilingual medical dataset to date, spanning 20 languages.
-
-<p align="center">
-  <img src="fig/map.svg" width="800"/>
-</p>
 
 ### Scale & Coverage
 - **800,000+ entries**
 - **20 languages**
   - High-resource: Arabic, Chinese, English, French, German, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Spanish, Thai
   - Low-resource: Bengali, Malay, Swahili, Urdu, Wolof, Yoruba, Zulu
+ 
+<p align="center">
+  <img src="Figure/map.svg"/>
+</p>
 
 ### Core Tasks
 - **Natural Language Inference:** BioNLI, MedNLI
@@ -39,28 +40,55 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 
 ### Evaluation Scope
 - **56 state-of-the-art LLMs**
-  - 12 proprietary LLMs
-  - 44 open-weight LLMs
 - **40,000+ independent experiments**
 - **125M+ generated responses**
 
+- Overall Performance of 12 Proprietary LLMs
+    <p align="center">
+      <img src="Figure/bench1.svg"/>
+    </p>
+- Overall Performance of 44 Open-Weight LLMs
+    <p align="center">
+      <img src="Figure/bench2.svg"/>
+    </p>
+    
+
 ### Key Findings
-- Proprietary LLMs achieve higher average performance but within a narrow range  
-- Open-weight LLMs show large variance and strong scaling effects  
-- Significant performance disparities across languages, especially on low-resource languages
+- Proprietary LLMs generally achieve stronger overall performance
+- Open-Weight LLMs exhibit significant performance variance and demonstrate a scaling law
+- LLMs show significant performance disparities across languages, especially on low-resource languages
 - Reasoning-enhanced LLMs consistently outperform non-reasoning counterparts  
+- Medical LLMs do not consistently outperform their general counterparts
+
+## GlobMed-LLMs
+We introduced GlobMed-LLMs, a suite of multilingual medical LLMs trained on GlobMed, with parameters ranging from 1.7B to 8B.
+
+<p align="center">
+  <img src="Figure/globmed-llm.svg"/>
+</p>
 
 ## Usage
 
 ### Load Dataset
 
+```python
+from datasets import load_dataset
+
+# Load GlobMed-MMLU-Pro (English)
+globmed_mmlu_pro = load_dataset("ruiyang-medinfo/GlobMed_MMLU-Pro", "en")
+
+# Access train and test splits
+globmed_mmlu_pro_train = globmed_mmlu_pro["train"]
+globmed_mmlu_pro_test = globmed_mmlu_pro["test"]
+```
 ## Contact
-Rui Yang: yang_rui@u.nus.edu.
+- **Rui Yang**: yang.rui@duke-nus.edu.sg
+- **Weihao Xuan**: xuan@ms.k.u-tokyo.ac.jp
 
 ## Citation
 ```
 
 ```
 
-## 10. License
-This repository is licensed under the [MIT](https://github.com/microsoft/PEACE/blob/main/LICENSE) License.
+## License
+This repository is licensed under the [MIT](https://github.com/microsoft/PEACE/blob/main/LICENSE) license.
