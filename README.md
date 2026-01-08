@@ -8,8 +8,7 @@
 
 <p align="center">
   <a href="https://arxiv.org/abs/2601.02186"><b>[📜 Paper]</b></a> •
-  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HuggingFace]</b></a> •
-  <a href="https://github.com/ruiyang-medinfo/GlobMed"><b>[🐱 GitHub]</b></a>
+  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HuggingFace]</b></a>
 </p>
 
 
@@ -87,7 +86,12 @@ globmed_mmlu_pro_test = globmed_mmlu_pro["test"]
 
 ## Citation
 ```
-
+@article{yang2026toward,
+  title={Toward Global Large Language Models in Medicine},
+  author={Yang, Rui and Li, Huitao and Xuan, Weihao and Qi, Heli and Li, Xin and Yu, Kunyu and Chen, Yingjian and Wang, Rongrong and Behmoaras, Jacques and Cai, Tianxi and others},
+  journal={arXiv preprint arXiv:2601.02186},
+  year={2026}
+}
 ```
 
 ## License
