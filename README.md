@@ -2,7 +2,7 @@
 
 <p align="center">
  <img src="https://img.shields.io/badge/Languages-20-green" />
- <img src="https://img.shields.io/badge/Entries-500K%2B-brightgreen" />
+ <img src="https://img.shields.io/badge/Entries-800K%2B-brightgreen" />
  <img src="https://img.shields.io/badge/LLMs_Evaluated-56-blue" />
 </p>
 
