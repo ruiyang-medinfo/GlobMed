@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://doi.org/10.48550/arXiv.2601.02186"><b>[📜 Paper]</b></a> •
-  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HF Datasets]</b></a> 
+  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 Hugging Face]</b></a> 
 </p>
 
 ## 📢 News
