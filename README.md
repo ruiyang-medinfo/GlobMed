@@ -8,9 +8,8 @@
 
 <p align="center">
   <a href="https://arxiv.org/abs/2601.02186"><b>[📜 Paper]</b></a> •
-  <a href="https://huggingface.co/collections/GlobMed"><b>[🤗 HuggingFace]</b></a>
+  <a href="https://huggingface.co/collections/ruiyang-medinfo/globmed"><b>[🤗 HuggingFace]</b></a>
 </p>
-
 
 ## 📢 News
 - **[2025.01]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
