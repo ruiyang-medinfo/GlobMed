@@ -47,13 +47,15 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
     
 
 ### Key Findings
-- Proprietary LLMs achieve higher average performance but within a narrow range  
-- Open-weight LLMs show large variance and strong scaling effects  
-- Significant performance disparities across languages, especially on low-resource languages
+- Proprietary LLMs generally achieve stronger overall performance
+- Open-Weight LLMs exhibit significant performance variance and demonstrate a scaling law
+- LLMs show significant performance disparities across languages, especially on low-resource languages
 - Reasoning-enhanced LLMs consistently outperform non-reasoning counterparts  
-- Medical-specific LLMs do not consistently outperform their general counterparts
+- Medical LLMs do not consistently outperform their general counterparts
 
 ## GlobMed-LLMs
+We introduced GlobMed-LLMs, a suite of multilingual medical LLMs trained on GlobMed, with parameters ranging from 1.7B to 8B.
+
 <p align="center">
   <img src="fig/globmed-llm.svg"/>
 </p>
@@ -61,12 +63,11 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 ## Usage
 
 ### Load Dataset
-GlobMed datasets are hosted on the Hugging Face platform and can be loaded using the `datasets` library.
 
 ```python
 from datasets import load_dataset
 
-# Load GlobMed-MMLU-Pro dataset (English)
+# Load GlobMed-MMLU-Pro (English)
 globmed_mmlu_pro = load_dataset("ruiyang-medinfo/GlobMed_MMLU-Pro", "en")
 
 # Access train and test splits
@@ -76,7 +77,6 @@ globmed_mmlu_pro_test = globmed_mmlu_pro["test"]
 ## Contact
 - **Rui Yang**: yang.rui@duke-nus.edu.sg
 - **Weihao Xuan**: xuan@ms.k.u-tokyo.ac.jp
-- **Dr. Nan Liu**: liu.nan@duke-nus.edu.sg
 
 ## Citation
 ```
