@@ -1,0 +1,59 @@
+# GlobalMed Dataset Configuration
+# Maps task names to HuggingFace datasets and their properties
+
+datasets:
+  # MCQA Tasks (Multiple Choice Question Answering)
+  MedQA:
+    hf_name: "ruiyang-medinfo/GlobMed_MedQA"
+    task_type: mcqa
+    num_options: 4
+    source_lang: en
+    description: "US Medical Licensing Examination questions"
+
+  HeadQA:
+    hf_name: "ruiyang-medinfo/GlobMed_HeadQA"
+    task_type: mcqa
+    num_options: 4
+    source_lang: es
+    description: "Spanish healthcare professional examination questions"
+
+  MedExpQA:
+    hf_name: "ruiyang-medinfo/GlobMed_MedExpQA"
+    task_type: mcqa
+    num_options: 5
+    source_lang: es
+    description: "Spanish medical explanation QA dataset"
+
+  MMLU-Pro:
+    hf_name: "ruiyang-medinfo/GlobMed_MMLU-Pro"
+    task_type: mcqa
+    num_options: 10
+    source_lang: en
+    description: "MMLU-Pro medical subset with 10 options"
+
+  # NLI Tasks (Natural Language Inference)
+  BioNLI:
+    hf_name: "ruiyang-medinfo/GlobMed_BioNLI"
+    task_type: nli
+    num_options: 2
+    labels:
+      - entailment
+      - contradiction
+    source_lang: en
+    description: "Biomedical natural language inference"
+
+# Task type definitions
+task_types:
+  mcqa:
+    fields:
+      - question
+      - options  # A, B, C, D, ...
+      - answer_index
+    prompt_key: mcqa
+
+  nli:
+    fields:
+      - premise
+      - hypothesis
+      - gold_label
+    prompt_key_pattern: "{task_name}_lowercase"  # mednli, bionli

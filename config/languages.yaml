@@ -1,0 +1,97 @@
+# GlobalMed Language Configuration
+# Defines supported languages and their properties
+
+languages:
+  # High-resource languages (well-supported by lighteval)
+  high_resource:
+    en:
+      name: English
+      lighteval_lang: ENGLISH
+      has_full_lighteval_support: true
+
+    zh:
+      name: Chinese
+      lighteval_lang: CHINESE
+      has_full_lighteval_support: true
+
+    fr:
+      name: French
+      lighteval_lang: FRENCH
+      has_full_lighteval_support: true
+
+    de:
+      name: German
+      lighteval_lang: GERMAN
+      has_full_lighteval_support: true
+
+    ja:
+      name: Japanese
+      lighteval_lang: JAPANESE
+      has_full_lighteval_support: true
+
+    ko:
+      name: Korean
+      lighteval_lang: KOREAN
+      has_full_lighteval_support: false  # Missing answer word in translation_literals
+
+    pt:
+      name: Portuguese
+      lighteval_lang: PORTUGUESE
+      has_full_lighteval_support: true
+
+    es:
+      name: Spanish
+      lighteval_lang: SPANISH
+      has_full_lighteval_support: true
+
+  # Low-resource languages (limited or no lighteval support)
+  low_resource:
+    sw:
+      name: Swahili
+      lighteval_lang: SWAHILI
+      has_full_lighteval_support: true
+
+    wo:
+      name: Wolof
+      lighteval_lang: null  # Not supported in lighteval
+      has_full_lighteval_support: false
+
+    yo:
+      name: Yoruba
+      lighteval_lang: YORUBA
+      has_full_lighteval_support: false  # Empty TranslationLiterals
+
+    zu:
+      name: Zulu
+      lighteval_lang: ZULU
+      has_full_lighteval_support: false  # Empty TranslationLiterals
+
+# Default language list for evaluation
+default_languages:
+  - en
+  - zh
+  - fr
+  - de
+  - ja
+  - ko
+  - pt
+  - es
+  - sw
+  - wo
+  - yo
+  - zu
+
+# Language code mappings
+language_word_to_code:
+  English: en
+  Chinese: zh
+  French: fr
+  German: de
+  Japanese: ja
+  Korean: ko
+  Portuguese: pt
+  Spanish: es
+  Swahili: sw
+  Wolof: wo
+  Yoruba: yo
+  Zulu: zu
