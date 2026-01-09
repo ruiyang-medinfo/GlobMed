@@ -24,7 +24,7 @@ We introduce GlobMed, the largest multilingual medical dataset to date, spanning
   - Low-resource: Bengali, Malay, Swahili, Urdu, Wolof, Yoruba, Zulu
  
 <p align="center">
-  <img src="Figure/map.svg"/>
+  <img src="figure/map.svg"/>
 </p>
 
 ### Core Tasks
@@ -43,11 +43,11 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 
 - Overall Performance of 12 Proprietary LLMs
     <p align="center">
-      <img src="Figure/bench1.svg"/>
+      <img src="figure/bench1.svg"/>
     </p>
 - Overall Performance of 44 Open-Weight LLMs
     <p align="center">
-      <img src="Figure/bench2.svg"/>
+      <img src="figure/bench2.svg"/>
     </p>
     
 
@@ -62,7 +62,7 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 We introduced GlobMed-LLMs, a suite of multilingual medical LLMs trained on GlobMed, with parameters ranging from 1.7B to 8B.
 
 <p align="center">
-  <img src="Figure/globmed-llm.svg"/>
+  <img src="figure/globmed-llm.svg"/>
 </p>
 
 ## Usage
