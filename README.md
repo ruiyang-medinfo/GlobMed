@@ -12,7 +12,7 @@
 </p>
 
 ## 📢 News
-- **[2025.01]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
+- **[2025.01.08]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
 
 ## GlobMed
 We introduce GlobMed, the largest multilingual medical dataset to date, spanning 20 languages.
