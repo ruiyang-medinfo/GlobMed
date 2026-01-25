@@ -12,6 +12,7 @@
 </p>
 
 ## 📢 News
+- **[2025.01.25]** 🔥 GlobMed has been expanded to cover 20 languages, with the addition of PubMedQA and MedMCQA. 
 - **[2025.01.08]** 🔥 GlobMed is publicly available through the Hugging Face platform.  
 
 ## GlobMed
