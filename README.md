@@ -31,7 +31,7 @@ We introduce GlobMed, the largest multilingual medical dataset to date, spanning
 ### Core Tasks
 - **Natural Language Inference:** BioNLI, MedNLI
 - **Long-Form Question Answering:** ExpertQA-Bio, ExpertQA-Med, LiveQA 
-- **Multiple-choice Question Answering:** HeadQA, MedExpQA, MedQA, MMLU-Pro  
+- **Multiple-choice Question Answering:** HeadQA, MedExpQA, MedMCQA, MedQA, MMLU-Pro, PubMedQA  
 
 ## GlobMed-Bench
 
@@ -39,8 +39,8 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 
 ### Evaluation Scope
 - **56 state-of-the-art LLMs**
-- **40,000+ independent experiments**
-- **125M+ generated responses**
+- **20,000+ independent experiments**
+- **32M+ generated responses**
 
 - Overall Performance of 12 Proprietary LLMs
     <p align="center">
