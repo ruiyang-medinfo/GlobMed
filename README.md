@@ -42,11 +42,11 @@ Building on GlobMed, we establish GlobMed-Bench, which systematically assesses 5
 - **20,000+ independent experiments**
 - **32M+ generated responses**
 
-- **Overall Performance of 12 Proprietary LLMs**
+#### Overall Performance of 12 Proprietary LLMs
     <p align="center">
       <img src="figure/bench1.svg"/>
     </p>
-- **Overall Performance of 44 Open-Weight LLMs**
+#### Overall Performance of 44 Open-Weight LLMs
     <p align="center">
       <img src="figure/bench2.svg"/>
     </p>
