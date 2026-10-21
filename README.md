@@ -298,7 +298,7 @@ Aggregated results for scoring:
 ```
 
 ## Contact
-- **Rui Yang**: yang.rui@duke-nus.edu.sg
+- **Rui Yang**: yang.rui@duke.edu
 - **Weihao Xuan**: xuan@ms.k.u-tokyo.ac.jp
 
 ## Citation
