@@ -23,3 +23,5 @@ CLAUDE.md
 /training/outputs/
 /training/.venv/
 /plotting/output/
+/analysis/data/
+/analysis/results/

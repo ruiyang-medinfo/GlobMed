@@ -1,7 +1,9 @@
 # Figure scripts
 
-These R scripts generate the quantitative components listed below, using the
-bundled SI values and unadjusted p values in `analysis/`.
+These R scripts generate the quantitative components listed below. Supply the
+local inputs described in [Statistical analysis](../analysis/README.md), then run
+`python3 analysis/paired_t_tests.py` to calculate the unadjusted p values.
+Input data and generated figures are not included in the repository.
 
 ```r
 install.packages(c("ggplot2", "dplyr", "scales", "remotes"))

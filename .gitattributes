@@ -1,2 +1,0 @@
-# Preserve the verified CSV byte representation (UTF-8 BOM and CRLF).
-analysis/**/*.csv -text whitespace=cr-at-eol

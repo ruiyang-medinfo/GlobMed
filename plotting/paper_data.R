@@ -1,4 +1,4 @@
-# Numerical inputs: SI printed five-run tables, bundled in analysis/data.
+# Local inputs: SI printed five-run tables in analysis/data.
 # Source this file from the supplied entry scripts; no model/API calls.
 plot_root <- normalizePath(file.path(dirname(.script_file), ".."))
 out_dir <- file.path(plot_root, "output")
