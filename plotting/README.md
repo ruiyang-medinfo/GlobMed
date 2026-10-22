@@ -1,32 +1,20 @@
-# Figure scripts
+# Paper plotting functions
 
-These R scripts generate the quantitative components listed below. Supply the
-local inputs described in [Statistical analysis](../analysis/README.md), then run
-`python3 analysis/paired_t_tests.py` to calculate the unadjusted p values.
-Input data and generated figures are not included in the repository.
+`plot_figures.R` contains three reusable functions. It loads no data and creates
+no files when sourced. Install `ggplot2` and `ggradar` before use.
 
 ```r
-install.packages(c("ggplot2", "dplyr", "scales", "remotes"))
+install.packages(c("ggplot2", "remotes"))
 remotes::install_github("ricardo-bion/ggradar@f99517ae4df2903d3dbd4116af91b24009a5ac93")
+
+source("plotting/plot_figures.R")
+plot_radar(radar_data, file = "radar.pdf")
+plot_bars(run_data, p_value = p, ylim = axis_limits, file = "bars.pdf")
+plot_heatmap(p_values, file = "heatmap.pdf")
 ```
 
-Run from the repository root; PDFs are saved in `plotting/output/`:
+- Radar: two rows (models); first column is the model name, other columns are axis accuracies in percent. Column order sets axis order.
+- Bars: columns `model`, `run`, `accuracy`; mean and sample SD are calculated. Supply the two-sided p value and panel axis limits. Optional `x_label` adds a language label.
+- Heatmap: columns `model`, `language`, `p_value`; optional model/language orders and title.
 
-```sh
-Rscript --vanilla plotting/scripts/radar_task.R
-Rscript --vanilla plotting/scripts/bar_4.R
-```
-
-| Script | Figure component |
-|---|---|
-| `radar_task.R` | Fig.5a: Gemma-3-4B / MedGemma-4B |
-| `radar_task_5.R`, `radar_lang_5.R` | Fig.5e: five 8B models |
-| `radar_language.R` | Fig.5e: LLaMA-3.1-8B / HuatuoGPT-o1-8B |
-| `radar_3_task.R`, `radar_language_3.R` | Fig.5f: three 70B models |
-| `bar_4.R`, `bar_2.R` | Fig.5e / Fig.5f: medical-model comparisons |
-| `bar_2_label.R` | Fig.6a: DeepSeek-V3 / DeepSeek-R1 |
-| `bar.R` | Fig.7c: English MedGemma / GlobMed comparison |
-
-Final figures include manual layout. Schematics such as Fig.1 were composed
-in Adobe Illustrator, maps in ArcGIS, and supplementary plots in Origin;
-these scripts do not recreate their complete layouts.
+Radar and bar functions cover the component types in Figs.5–7 and Supplementary Fig.58; the heatmap function follows Fig.4. Model pairs, axis order and limits are supplied by the caller. Final manual composition is separate. These functions consolidate the supplied scripts and add the heatmap; input data and generated figures are not bundled.
