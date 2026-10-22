@@ -14,3 +14,13 @@
 .env
 docs
 CLAUDE.md
+
+# Authorized local datasets and generated training/checkpoint artifacts
+/data/
+/training/data/*.jsonl
+/training/data/*_train.json
+/training/third_party/
+/training/outputs/
+/training/.venv/
+/analysis/reproduced/
+/plotting/output/

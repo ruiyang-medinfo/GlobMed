@@ -144,6 +144,12 @@ def get_message_from_doc(
     Returns:
         List of message dicts in OpenAI format: [{"role": "user", "content": "..."}]
     """
+    if subset == "MedNLI":
+        from globalmed.mednli_prompts import MEDNLI_PROMPTS
+        if prompt_style != "da":
+            raise ValueError("The SI MedNLI templates use direct answers. Select --prompt_style da.")
+        return [{"role": "user", "content": MEDNLI_PROMPTS[lang].format(
+            premise=doc["premise"], hypothesis=doc["hypothesis"])}]
     if "nli" in subset.lower():
         # NLI task (BioNLI)
         prompt_key = f"{subset.lower()}_{prompt_style}"

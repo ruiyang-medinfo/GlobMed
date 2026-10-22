@@ -10,14 +10,13 @@ Provides:
 import string
 from typing import Dict, List, Literal, Optional
 
-from datasets import load_dataset
 
 from globalmed.config import get_dataset_config, get_default_languages
 
 
 # Task type constants
 MCQA_TASKS = ["MedQA", "HeadQA", "MedExpQA", "MMLU-Pro"]
-NLI_TASKS = ["BioNLI"]
+NLI_TASKS = ["BioNLI", "MedNLI"]
 
 # Default supported languages
 DEFAULT_LANGUAGES = [
@@ -56,7 +55,8 @@ BIONLI_LABEL_MAP = {
 def read_data(
     subset: str,
     lang: str,
-    split: Literal["train", "test"] = "test"
+    split: Literal["train", "test"] = "test",
+    local_mednli: Optional[str] = None
 ) -> List[Dict]:
     """
     Unified data reading interface.
@@ -78,6 +78,14 @@ def read_data(
             - answer_index: Correct answer index (0-based)
             - gold_label: Gold label string (NLI only)
     """
+    if subset == "MedNLI":
+        if not local_mednli:
+            raise ValueError("MedNLI is not distributed here. Supply an authorized local file with local_mednli=PATH.")
+        from globalmed.local_mednli import read_local_mednli
+        return read_local_mednli(local_mednli, lang)
+    if local_mednli:
+        raise ValueError("local_mednli is only valid for MedNLI")
+    from datasets import load_dataset
     dataset_config = get_dataset_config()
     task_config = dataset_config["datasets"].get(subset, {})
     hf_name = task_config.get("hf_name", f"ruiyang-medinfo/GlobMed_{subset}")
@@ -145,6 +153,7 @@ def get_num_options(subset: str) -> int:
         "MedExpQA": 5,
         "MMLU-Pro": 10,
         "BioNLI": 2,
+        "MedNLI": 3,
     }
     return option_map.get(subset, 4)
 

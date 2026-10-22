@@ -1,0 +1,16 @@
+{
+  "globmed_direct": {
+    "file_name": "globmed_direct_train.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations"
+    }
+  },
+  "globmed_distill": {
+    "file_name": "globmed_distill_train.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations"
+    }
+  }
+}

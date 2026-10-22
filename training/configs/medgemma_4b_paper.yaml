@@ -1,0 +1,43 @@
+# GlobMed-MedGemma-4B as in the paper: 16 x H100, global batch 8 per GPU x 16 GPUs x 2 accumulation = 256, 1 epoch.
+# With a different GPU count, change gradient_accumulation_steps to keep the global batch at 256.
+
+### model
+model_name_or_path: google/medgemma-4b-it
+trust_remote_code: true
+
+### method
+stage: sft
+do_train: true
+finetuning_type: full
+deepspeed: third_party/LlamaFactory/examples/deepspeed/ds_z2_config.json
+
+### dataset
+dataset_dir: data
+dataset: globmed_direct,globmed_distill
+template: gemma3
+cutoff_len: 4096
+overwrite_cache: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+
+### output
+output_dir: outputs/medgemma_4b_paper
+logging_steps: 1
+save_steps: 500
+save_only_model: false
+plot_loss: true
+overwrite_output_dir: true
+report_to: none
+
+### train
+per_device_train_batch_size: 8
+gradient_accumulation_steps: 2
+learning_rate: 1.0e-5
+num_train_epochs: 1.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+weight_decay: 0.0
+bf16: true
+flash_attn: fa2
+ddp_timeout: 180000000
+seed: 42

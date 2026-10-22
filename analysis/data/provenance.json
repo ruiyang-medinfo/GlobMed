@@ -1,0 +1,13 @@
+{
+  "source": "Supplementary_Information.docx",
+  "source_sha256": "cccfdba8f484e5f77aaa7047616de25e6b533be5a0d19a5b61965c5e1d3f831b",
+  "source_tables": {
+    "base_runs": "92–96, 98–102, 104–108, 110–114, 116–120, 122–126",
+    "fine_tuning_runs": "129–133, 135–139, 141–145, 147–151, 153–157, 159–163"
+  },
+  "accuracy_unit": "percent",
+  "input_precision": "printed values with two decimal places",
+  "input_rows": 23040,
+  "comparisons": 4992,
+  "analysis_date": "2026-10-21"
+}

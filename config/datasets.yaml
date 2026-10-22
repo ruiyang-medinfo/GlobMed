@@ -42,6 +42,14 @@ datasets:
     source_lang: en
     description: "Biomedical natural language inference"
 
+  MedNLI:
+    task_type: nli
+    num_options: 3
+    labels: [entailment, neutral, contradiction]
+    source_lang: en
+    local_only: true
+    description: "Authorized local files only; no MedNLI data are redistributed"
+
 # Task type definitions
 task_types:
   mcqa:

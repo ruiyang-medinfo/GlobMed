@@ -86,6 +86,15 @@ globmed_mmlu_pro_test = globmed_mmlu_pro["test"]
 
 ## Running Evaluation
 
+For the five-sample evaluation command, authorized local MedNLI support,
+training recipes, statistical analysis and figure scripts, see
+[Reproducibility](REPRODUCIBILITY.md). Both inference backends support
+`--n_sampling 5`; the default of 1 is for a single-completion run.
+
+- [Training recipes](training/README.md)
+- [Statistical analysis and all 4,992 comparisons](analysis/README.md)
+- [R figure components and software workflow](plotting/README.md)
+
 ### Installation
 
 #### Basic Installation

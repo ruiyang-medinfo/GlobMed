@@ -36,6 +36,7 @@ DATASET_NUM_OPTIONS = {
     "MedExpQA": 5,
     "MMLU-Pro": 10,
     "BioNLI": 2,
+    "MedNLI": 3,
 }
 
 
@@ -317,7 +318,7 @@ def main():
         description="Pretty print GlobalMed evaluation results"
     )
     parser.add_argument("--subset", type=str, default="MedQA",
-                        choices=["MedQA", "HeadQA", "MedExpQA", "MMLU-Pro", "BioNLI"],
+                        choices=["MedQA", "HeadQA", "MedExpQA", "MMLU-Pro", "BioNLI", "MedNLI"],
                         help="Dataset subset")
     parser.add_argument("--prompt_style", type=str, default="shot", choices=["shot", "da"],
                         help="Prompt style")
