@@ -44,7 +44,7 @@ from globalmed.config import (
 )
 from globalmed.data import read_data, DEFAULT_LANGUAGES, get_num_options
 from globalmed.sampling import (add_sampling_arguments, validate_arguments,
-                                optional_generation_args, load_finished_ids)
+                                load_finished_ids)
 from globalmed.prompt import get_message_from_doc
 from string import ascii_uppercase
 from globalmed.judge import extract_answer
@@ -124,7 +124,6 @@ def build_generation_args(args):
         gen_args = {"max_tokens": args.max_tokens}
 
     gen_args["n"] = args.n_sampling
-    gen_args.update(optional_generation_args(args))
 
     # Add reasoning effort for o-series models
     if args.reasoning_effort:

@@ -5,12 +5,6 @@ from pathlib import Path
 
 
 def add_sampling_arguments(parser):
-    parser.add_argument("--temperature", type=float, default=None,
-                        help="Explicit temperature; omitted means backend default")
-    parser.add_argument("--top_p", type=float, default=None,
-                        help="Explicit nucleus sampling probability; omitted means backend default")
-    parser.add_argument("--seed", type=int, default=None,
-                        help="Optional generation seed; support depends on backend/model")
     parser.add_argument("--local_mednli", default=None,
                         help="Authorized local MedNLI JSON/JSONL; requires --subset MedNLI --lang LANG --prompt_style da")
 
@@ -18,20 +12,11 @@ def add_sampling_arguments(parser):
 def validate_arguments(args):
     if args.n_sampling < 1 or args.max_tokens < 1:
         raise ValueError("n_sampling and max_tokens must be positive")
-    if args.temperature is not None and not 0 <= args.temperature <= 2:
-        raise ValueError("temperature must be in [0, 2]")
-    if args.top_p is not None and not 0 < args.top_p <= 1:
-        raise ValueError("top_p must be in (0, 1]")
     if args.subset == "MedNLI":
         if not args.local_mednli or not args.lang or args.prompt_style != "da":
             raise ValueError("MedNLI requires --local_mednli PATH --lang LANG --prompt_style da")
     elif args.local_mednli:
         raise ValueError("--local_mednli is only valid with --subset MedNLI")
-
-
-def optional_generation_args(args):
-    return {key: getattr(args, key, None) for key in ("temperature", "top_p", "seed")
-            if getattr(args, key, None) is not None}
 
 
 def load_finished_ids(result_path, n_sampling=1, generation=None):

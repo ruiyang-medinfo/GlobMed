@@ -22,7 +22,7 @@ from tqdm import tqdm
 from globalmed.config import RESULTS_DIR, load_env
 from globalmed.data import read_data, DEFAULT_LANGUAGES, get_num_options
 from globalmed.sampling import (add_sampling_arguments, validate_arguments,
-                                optional_generation_args, load_finished_ids)
+                                load_finished_ids)
 from globalmed.prompt import get_message_from_doc
 from string import ascii_uppercase
 from globalmed.judge import extract_answer
@@ -237,12 +237,10 @@ def main():
     sampling_params = SamplingParams(
         n=args.n_sampling,
         max_tokens=args.max_tokens,
-        **optional_generation_args(args),
     )
 
     generation = {"backend": "vllm", "model": args.model_id, "think_mode": args.think_mode,
-                  "parameters": {"n": args.n_sampling, "max_tokens": args.max_tokens,
-                                 **optional_generation_args(args)}}
+                  "parameters": {"n": args.n_sampling, "max_tokens": args.max_tokens}}
 
     # Language list
     lang_list = [args.lang] if args.lang else DEFAULT_LANGUAGES

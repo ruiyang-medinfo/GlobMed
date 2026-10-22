@@ -18,7 +18,6 @@ from globalmed.sampling import load_finished_ids, validate_arguments
 def args(**overrides):
     return Namespace(**(dict(model_id="test-model", subset="MedQA", lang="en",
                             prompt_style="da", n_sampling=5, max_tokens=128,
-                            temperature=0.7, top_p=0.9, seed=41,
                             reasoning_effort=None, think_mode="none", local_mednli=None)
                         | overrides))
 
@@ -64,9 +63,9 @@ def test_five_samples_and_settings_are_forwarded():
     row = dict(id="synthetic", question="Synthetic question", options={"A": "a", "B": "b"})
     result = asyncio.run(process_item(client, row, args(), "en"))
     assert len(result["response"].choices) == 5
-    assert {k: captured[k] for k in ["n", "temperature", "top_p", "seed", "max_tokens"]} == {
-        "n": 5, "temperature": 0.7, "top_p": 0.9, "seed": 41, "max_tokens": 128}
-    gen = build_generation_args(args(temperature=None, top_p=None, seed=None))
+    assert {k: captured[k] for k in ["n", "max_tokens"]} == {"n": 5, "max_tokens": 128}
+    assert not {"temperature", "top_p", "seed"} & captured.keys()
+    gen = build_generation_args(args())
     assert not {"temperature", "top_p", "seed"} & gen.keys()
 
 
@@ -78,7 +77,7 @@ def test_resume_requires_latest_complete_five_samples_and_settings(tmp_path):
     assert load_finished_ids(path, 5, gen) == []
     path.write_text(json.dumps(one) + "\n" + json.dumps(five) + "\n")
     assert load_finished_ids(path, 5, gen) == ["x"]
-    assert load_finished_ids(path, 5, {"n": 5, "temperature": 0.8}) == []
+    assert load_finished_ids(path, 5, {"n": 5, "max_tokens": 256}) == []
     path.write_text(json.dumps(five) + "\n" + json.dumps(one) + "\n")
     assert load_finished_ids(path, 5, gen) == []
 
@@ -103,8 +102,7 @@ def test_vllm_template_switch_without_gpu():
     assert len(prompt) == 1
 
 
-@pytest.mark.parametrize("overrides", [dict(n_sampling=0), dict(top_p=0),
-                                     dict(temperature=-1), dict(subset="MedNLI")])
+@pytest.mark.parametrize("overrides", [dict(n_sampling=0), dict(subset="MedNLI")])
 def test_invalid_settings_fail_early(overrides):
     with pytest.raises(ValueError):
         validate_arguments(args(**overrides))

@@ -25,13 +25,11 @@ that every item has five answer slots and reports each accuracy, their mean,
 sample SD, and missing-answer count. Missing answers count as incorrect.
 Use the exact model ID/path and prompt style appropriate to the experiment.
 
-This revision additionally exposes `--temperature`, `--top_p`, and `--seed` in
-both entry points, plus `--think_mode` in local vLLM (already present in the API
-entry point). Values are sent only when explicitly supplied; otherwise the
-backend defaults apply. For example, `--temperature 0.7 --top_p 0.9 --seed 42`
-illustrates the syntax and is **not a claim about the historical experiments**.
-Model-specific original settings/logs were not supplied with the revision
-materials, so no retrospective values have been inferred or invented.
+Temperature, top-p and generation seed remain at the backend defaults, as in
+the original evaluation entry points; there are no added CLI overrides for
+these settings. The original model-specific runtime logs were not supplied,
+so no retrospective values have been inferred. The local vLLM entry point
+supports `--think_mode`, already present in the API entry point.
 
 Each new JSONL record stores its generation configuration and ordered sample
 slots. Resume requires the requested number of nonempty responses and matching
