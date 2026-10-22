@@ -1,5 +1,0 @@
-﻿family,comparisons,zero_variance,raw_significant_original,BH_significant_original,raw_significant_finite,BH_significant_conservative,lost_significance_original,level_changes_original,level_changes_conservative
-language_disparity,4928,15,4310,4283,4297,4270,27,204,208
-medical_finetuning,10,0,10,10,10,10,0,0,0
-reasoning,6,0,6,6,6,6,0,0,0
-globmed_finetuning,48,0,48,48,48,48,0,0,0

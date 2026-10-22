@@ -10,6 +10,7 @@ Provides:
 import string
 from typing import Dict, List, Literal, Optional
 
+from datasets import load_dataset
 
 from globalmed.config import get_dataset_config, get_default_languages
 
@@ -85,7 +86,6 @@ def read_data(
         return read_local_mednli(local_mednli, lang)
     if local_mednli:
         raise ValueError("local_mednli is only valid for MedNLI")
-    from datasets import load_dataset
     dataset_config = get_dataset_config()
     task_config = dataset_config["datasets"].get(subset, {})
     hf_name = task_config.get("hf_name", f"ruiyang-medinfo/GlobMed_{subset}")

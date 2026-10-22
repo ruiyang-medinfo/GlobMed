@@ -42,9 +42,7 @@ from globalmed.config import (
     load_env,
     uses_max_completion_tokens,
 )
-from globalmed.data import read_data, DEFAULT_LANGUAGES, get_num_options
-from globalmed.sampling import (add_sampling_arguments, validate_arguments,
-                                load_finished_ids)
+from globalmed.data import read_data, DEFAULT_LANGUAGES
 from globalmed.prompt import get_message_from_doc
 from string import ascii_uppercase
 from globalmed.judge import extract_answer
@@ -117,27 +115,6 @@ async def run_model_by_message(
     return None
 
 
-def build_generation_args(args):
-    if uses_max_completion_tokens(args.model_id):
-        gen_args = {"max_completion_tokens": args.max_tokens}
-    else:
-        gen_args = {"max_tokens": args.max_tokens}
-
-    gen_args["n"] = args.n_sampling
-
-    # Add reasoning effort for o-series models
-    if args.reasoning_effort:
-        gen_args["reasoning_effort"] = args.reasoning_effort
-
-    # Add thinking mode for compatible models (e.g., Qwen3 via vLLM)
-    if args.think_mode == "think":
-        gen_args["extra_body"] = {"chat_template_kwargs": {"enable_thinking": True}}
-    elif args.think_mode == "nothink":
-        gen_args["extra_body"] = {"chat_template_kwargs": {"enable_thinking": False}}
-
-    return gen_args
-
-
 async def process_item(
     client: AsyncOpenAI,
     doc: Dict,
@@ -158,7 +135,23 @@ async def process_item(
     """
     messages = get_message_from_doc(doc, args.subset, lang, args.prompt_style)
 
-    gen_args = build_generation_args(args)
+    # Build generation arguments
+    if uses_max_completion_tokens(args.model_id):
+        gen_args = {"max_completion_tokens": args.max_tokens}
+    else:
+        gen_args = {"max_tokens": args.max_tokens}
+
+    gen_args["n"] = args.n_sampling
+
+    # Add reasoning effort for o-series models
+    if args.reasoning_effort:
+        gen_args["reasoning_effort"] = args.reasoning_effort
+
+    # Add thinking mode for compatible models (e.g., Qwen3 via vLLM)
+    if args.think_mode == "think":
+        gen_args["extra_body"] = {"chat_template_kwargs": {"enable_thinking": True}}
+    elif args.think_mode == "nothink":
+        gen_args["extra_body"] = {"chat_template_kwargs": {"enable_thinking": False}}
 
     response = await run_model_by_message(
         client, messages, doc["id"], args.model_id, gen_args
@@ -196,6 +189,32 @@ async def process_with_semaphore(
         # Small random delay to avoid burst requests
         await asyncio.sleep(random.uniform(0.1, 0.5))
         return await process_item(client, doc, args, lang)
+
+
+def load_finished_ids(result_path: str) -> List[str]:
+    """
+    Load IDs of finished samples from existing result file.
+
+    Args:
+        result_path: Path to JSONL result file
+
+    Returns:
+        List of finished IDs
+    """
+    finished_ids = []
+    if exists(result_path):
+        with open(result_path) as f:
+            for line in f:
+                try:
+                    doc = json.loads(line.strip())
+                    # Check if response is valid
+                    if doc.get("responses") and all(
+                        r.get("content") for r in doc["responses"]
+                    ):
+                        finished_ids.append(doc["id"])
+                except json.JSONDecodeError:
+                    continue
+    return finished_ids
 
 
 def generate_final_json(
@@ -306,9 +325,13 @@ async def main():
                         help="Use Azure OpenAI instead of OpenAI")
     parser.add_argument("--overwrite", action="store_true",
                         help="Overwrite existing results")
-    add_sampling_arguments(parser)
+    parser.add_argument("--local_mednli", default=None,
+                        help="Authorized local MedNLI JSON/JSONL file")
     args = parser.parse_args()
-    validate_arguments(args)
+    if args.subset == "MedNLI" and (not args.local_mednli or not args.lang or args.prompt_style != "da"):
+        parser.error("MedNLI requires --local_mednli PATH --lang LANG --prompt_style da")
+    if args.local_mednli and args.subset != "MedNLI":
+        parser.error("--local_mednli is only valid with --subset MedNLI")
 
     # Load environment variables
     load_env()
@@ -336,8 +359,6 @@ async def main():
         )
         logger.info(f"Using OpenAI: {os.environ.get('OPENAI_BASE', 'https://api.openai.com/v1')}")
 
-    generation = {"backend": "openai", "model": args.model_id, "parameters": build_generation_args(args)}
-
     # Language list
     lang_list = [args.lang] if args.lang else DEFAULT_LANGUAGES
 
@@ -351,7 +372,7 @@ async def main():
         # Load finished IDs
         finished_ids = []
         if not args.overwrite:
-            finished_ids = load_finished_ids(result_save_path, args.n_sampling, generation)
+            finished_ids = load_finished_ids(result_save_path)
 
         # Load data
         try:
@@ -384,7 +405,7 @@ async def main():
             ]
 
             # Process with progress bar
-            with open(result_save_path, "w" if args.overwrite else "a") as f:
+            with open(result_save_path, "w" if not finished_ids else "a") as f:
                 for coro in tqdm_asyncio.as_completed(tasks, total=len(tasks)):
                     ret = await coro
 
@@ -393,14 +414,13 @@ async def main():
                         "request": json.dumps(ret["request"], ensure_ascii=False),
                         "responses": [],
                         "metadata": ret["metadata"],
-                        "generation": generation,
                     }
 
                     if ret["response"] and hasattr(ret["response"], "choices"):
                         # Get num_choices from metadata options
-                        num_choices = get_num_options(args.subset)
+                        num_choices = 3 if args.subset == "MedNLI" else (len(ret["metadata"].get("options", {})) or 4)
 
-                        for choice in sorted(ret["response"].choices, key=lambda choice: choice.index):
+                        for choice in ret["response"].choices:
                             content = getattr(choice.message, "content", None)
                             reasoning = getattr(choice.message, "reasoning_content", None)
                             answer = extract_answer(
@@ -408,7 +428,6 @@ async def main():
                             ) if content else None
 
                             dump_dict["responses"].append({
-                                "run_idx": choice.index,
                                 "content": content,
                                 "reasoning": reasoning,
                                 "answer": answer,

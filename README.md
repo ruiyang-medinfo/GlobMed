@@ -86,14 +86,25 @@ globmed_mmlu_pro_test = globmed_mmlu_pro["test"]
 
 ## Running Evaluation
 
-For the five-sample evaluation command, authorized local MedNLI support,
-training recipes, statistical analysis and figure scripts, see
-[Reproducibility](REPRODUCIBILITY.md). Both inference backends support
-`--n_sampling 5`; the default of 1 is for a single-completion run.
+Both evaluation backends already support `--n_sampling 5` for five completions
+per item (default: 1). Use `--overwrite` when replacing an earlier single-completion
+run, and `globalmed.pretty_print --run_idx 0` through `4` to score each run.
 
-- [Training recipes](training/README.md)
-- [Statistical analysis and all 4,992 comparisons](analysis/README.md)
-- [R figure components and software workflow](plotting/README.md)
+MedNLI uses the same evaluation pipeline with an authorized local JSON/JSONL
+file; its data and translations are not redistributed. Input fields are
+`sentence1`, `sentence2`, `gold_label` (or `premise`, `hypothesis`, `gold_label`).
+The label order is A: entailment, B: neutral, C: contradiction.
+
+```bash
+python -m globalmed.run_openai --model_id MODEL_ID --subset MedNLI \
+    --local_mednli /path/to/mednli.jsonl --lang en --prompt_style da --n_sampling 5
+```
+
+Use `globalmed.run_vllm` with the same dataset arguments for local inference.
+
+- [Training](training/README.md)
+- [Statistical analysis](analysis/README.md)
+- [Figure scripts](plotting/README.md)
 
 ### Installation
 

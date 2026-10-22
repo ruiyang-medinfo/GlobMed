@@ -66,7 +66,7 @@ def clean(doc: dict) -> dict | None:
     """Drop empty options; return None when the row cannot form a valid sample."""
     if "options" not in doc:  # BioNLI: fixed A/B options live in the template
         return doc
-    options = {k: v for k, v in doc["options"].items() if v is not None and str(v).strip()}
+    options = {k: v for k, v in doc["options"].items() if str(v).strip()}
     if gold_letter(doc) not in options:
         return None
     return {**doc, "options": options}
@@ -103,26 +103,15 @@ def build_direct() -> list[dict]:
 
 def build_distill(records_path: Path) -> list[dict]:
     """Turn reasoning records ({id,dataset,lang,row,reasoning,answer} per line) into think-format samples."""
-    samples, seen = [], set()
+    samples = []
     for line in records_path.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         record = json.loads(line)
         subset, lang = record["dataset"], record["lang"]
-        if subset not in SUBSETS or lang not in DEFAULT_LANGUAGES:
-            raise ValueError("Distillation record uses an unsupported dataset or language")
-        if type(record["row"]) is not int or record["row"] < 0:
-            raise ValueError("Distillation row must be a nonnegative integer")
-        if record["id"] in seen:
-            raise ValueError(f"Duplicate distillation ID: {record['id']}")
-        if not isinstance(record["reasoning"], str) or not record["reasoning"].strip():
-            raise ValueError(f"Empty reasoning: {record['id']}")
-        seen.add(record["id"])
         doc = clean(load(subset, lang)[record["row"]])
-        if doc is None or doc["id"] != record["id"]:
-            raise ValueError(f"record {record['id']} does not match its source row")
-        if record["answer"] != gold_letter(doc):
-            raise ValueError(f"record {record['id']} has a wrong answer")
+        assert doc is not None and doc["id"] == record["id"], f"record {record['id']} does not match its source row"
+        assert record["answer"] == gold_letter(doc), f"record {record['id']} has a wrong answer"
         response = f"<think>\n{record['reasoning'].strip()}\n</think>\n\n{answer_sentence(doc, lang)}"
         samples.append(to_sample(doc, subset, lang, "shot", response))
     print(f"distill: {len(samples)} samples from {records_path}")

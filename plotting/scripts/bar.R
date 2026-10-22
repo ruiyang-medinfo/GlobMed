@@ -53,6 +53,3 @@ p <- ggplot(summary_data, aes(x = Position, y = Mean, fill = GroupName)) +
 
 
 ggsave(file.path(out_dir, "bar.pdf"), p, width = 3, height = 3.5)
-
-objects <- intersect(c("radar_data", "radar_data_scaled", "summary_data"), ls())
-jsonlite::write_json(mget(objects), file.path(out_dir, "bar_values.json"), dataframe="rows", auto_unbox=TRUE, pretty=TRUE, digits=15, na="null")

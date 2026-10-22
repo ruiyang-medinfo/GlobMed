@@ -17,12 +17,12 @@ import os
 from os.path import dirname, exists, join
 from typing import Dict, List, Optional, Set
 
+import torch
 from tqdm import tqdm
+from transformers import AutoTokenizer
 
 from globalmed.config import RESULTS_DIR, load_env
-from globalmed.data import read_data, DEFAULT_LANGUAGES, get_num_options
-from globalmed.sampling import (add_sampling_arguments, validate_arguments,
-                                load_finished_ids)
+from globalmed.data import read_data, DEFAULT_LANGUAGES
 from globalmed.prompt import get_message_from_doc
 from string import ascii_uppercase
 from globalmed.judge import extract_answer
@@ -34,7 +34,7 @@ logging.basicConfig(
 )
 
 
-def setup_tokenizer(model_id: str):
+def setup_tokenizer(model_id: str) -> AutoTokenizer:
     """
     Setup tokenizer for the model.
 
@@ -44,7 +44,6 @@ def setup_tokenizer(model_id: str):
     Returns:
         Configured tokenizer
     """
-    from transformers import AutoTokenizer
     tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
 
     # Ensure pad token is set
@@ -56,7 +55,7 @@ def setup_tokenizer(model_id: str):
 
 def prepare_prompts(
     ds: List[Dict],
-    tokenizer,
+    tokenizer: AutoTokenizer,
     args: argparse.Namespace,
     lang: str
 ) -> List[str]:
@@ -82,12 +81,27 @@ def prepare_prompts(
             messages,
             tokenize=False,
             add_generation_prompt=True,
-            **({"enable_thinking": args.think_mode == "think"}
-               if args.think_mode != "none" else {}),
         )
         prompts.append(prompt)
 
     return prompts
+
+
+def load_finished_ids(result_path: str) -> List[str]:
+    """Load IDs of finished samples."""
+    finished_ids = []
+    if exists(result_path):
+        with open(result_path) as f:
+            for line in f:
+                try:
+                    doc = json.loads(line.strip())
+                    if doc.get("responses") and all(
+                        r.get("content") for r in doc["responses"]
+                    ):
+                        finished_ids.append(doc["id"])
+                except json.JSONDecodeError:
+                    continue
+    return finished_ids
 
 
 def generate_final_json(
@@ -194,17 +208,18 @@ def main():
                         help="Limit number of samples to process (for testing)")
     parser.add_argument("--overwrite", action="store_true",
                         help="Overwrite existing results")
-    parser.add_argument("--think_mode", choices=["none", "think", "nothink"],
-                        default="none", help="Explicit thinking mode for compatible chat templates")
-    add_sampling_arguments(parser)
+    parser.add_argument("--local_mednli", default=None,
+                        help="Authorized local MedNLI JSON/JSONL file")
     args = parser.parse_args()
-    validate_arguments(args)
+    if args.subset == "MedNLI" and (not args.local_mednli or not args.lang or args.prompt_style != "da"):
+        parser.error("MedNLI requires --local_mednli PATH --lang LANG --prompt_style da")
+    if args.local_mednli and args.subset != "MedNLI":
+        parser.error("--local_mednli is only valid with --subset MedNLI")
 
     load_env()
 
     # Import vLLM (optional dependency)
     try:
-        import torch
         from vllm import LLM, SamplingParams
     except ImportError:
         raise ImportError(
@@ -239,9 +254,6 @@ def main():
         max_tokens=args.max_tokens,
     )
 
-    generation = {"backend": "vllm", "model": args.model_id, "think_mode": args.think_mode,
-                  "parameters": {"n": args.n_sampling, "max_tokens": args.max_tokens}}
-
     # Language list
     lang_list = [args.lang] if args.lang else DEFAULT_LANGUAGES
 
@@ -255,7 +267,7 @@ def main():
         # Load finished IDs
         finished_ids = []
         if not args.overwrite:
-            finished_ids = load_finished_ids(result_save_path, args.n_sampling, generation)
+            finished_ids = load_finished_ids(result_save_path)
 
         # Load data
         try:
@@ -283,7 +295,7 @@ def main():
         prompts = prepare_prompts(ds, tokenizer, args, lang)
 
         # Process in batches with real-time JSONL writing
-        with open(result_save_path, "w" if args.overwrite else "a") as f:
+        with open(result_save_path, "w" if not finished_ids else "a") as f:
             for batch_start in tqdm(range(0, len(prompts), args.batch_size), desc=f"[{lang}]"):
                 batch_end = min(batch_start + args.batch_size, len(prompts))
                 batch_prompts = prompts[batch_start:batch_end]
@@ -295,23 +307,21 @@ def main():
                 # Process outputs and write immediately
                 for idx, (doc, output) in enumerate(zip(batch_docs, outputs)):
                     # Get num_choices from metadata options
-                    num_choices = get_num_options(args.subset)
+                    num_choices = 3 if args.subset == "MedNLI" else (len(doc.get("options", {})) or 4)
 
                     result = {
                         "id": doc["id"],
                         "request": batch_prompts[idx],
                         "responses": [],
                         "metadata": doc,
-                        "generation": generation,
                     }
 
-                    for completion in sorted(output.outputs, key=lambda completion: completion.index):
+                    for completion in output.outputs:
                         text = completion.text
                         answer = extract_answer(
                             text, lang=lang, num_choices=num_choices
                         ) if text else None
                         result["responses"].append({
-                            "run_idx": completion.index,
                             "content": text,
                             "answer": answer,
                         })

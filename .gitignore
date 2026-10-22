@@ -22,5 +22,4 @@ CLAUDE.md
 /training/third_party/
 /training/outputs/
 /training/.venv/
-/analysis/reproduced/
 /plotting/output/

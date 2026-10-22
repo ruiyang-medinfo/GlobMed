@@ -34,5 +34,3 @@ p <- ggradar(
 
 
 ggsave(file.path(out_dir, "llama_70b_lang.pdf"), p, width = 5, height = 5)
-objects <- intersect(c("radar_data", "radar_data_scaled", "summary_data"), ls())
-jsonlite::write_json(mget(objects), file.path(out_dir, "radar_language_3_values.json"), dataframe="rows", auto_unbox=TRUE, pretty=TRUE, digits=15, na="null")
